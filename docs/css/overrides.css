@@ -1,0 +1,27 @@
+:root {
+    --accent: #34a6d5 !important;
+    font-family: andale mono, Courier New, monospace !important;
+}
+
+section.cover.show{
+    background: url("/media/bg.jpg") center center / cover !important;
+    background-color: #3b2f52 !important;
+    color: rgba(100, 100, 100, 0.88);
+}
+
+section.cover.show p, section.cover.show {
+    color: rgba(89,89,89,0.6);
+}
+
+.markdown-section pre{
+    line-height: 1.5;
+}
+
+.markdown-section code{
+    font-family: andale mono, Courier New, monospace !important;
+    font-weight: bold;
+}
+
+.search input {
+	border-radius:5px;
+}

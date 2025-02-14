@@ -1,0 +1,133 @@
+/*
+ * Laserwave Theme originally by Jared Jones for Visual Studio Code
+ * https://github.com/Jaredk3nt/laserwave
+ *
+ * Ported for PrismJS by Simon Jespersen [https://github.com/simjes]
+ */
+
+code[class*="lang-"],
+pre[class*="lang-"] {
+	background: #27212e;
+	color: #ffffff;
+	font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace; /* this is the default */
+	/* The following properties are standard, please leave them as they are */
+	font-size: 1em;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	line-height: 1.5;
+	-moz-tab-size: 2;
+	-o-tab-size: 2;
+	tab-size: 2;
+	/* The following properties are also standard */
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+code[class*="lang-"]::-moz-selection,
+code[class*="lang-"] ::-moz-selection,
+pre[class*="lang-"]::-moz-selection,
+pre[class*="lang-"] ::-moz-selection {
+	background: #eb64b927;
+	color: inherit;
+}
+
+code[class*="lang-"]::selection,
+code[class*="lang-"] ::selection,
+pre[class*="lang-"]::selection,
+pre[class*="lang-"] ::selection {
+	background: #eb64b927;
+	color: inherit;
+}
+
+/* Properties specific to code blocks */
+pre[class*="lang-"] {
+	padding: 1em; /* this is standard */
+	margin: 0.5em 0; /* this is the default */
+	overflow: auto; /* this is standard */
+	border-radius: 0.5em;
+}
+
+/* Properties specific to inline code */
+:not(pre) > code[class*="lang-"] {
+	padding: 0.2em 0.3em;
+	border-radius: 0.5rem;
+	white-space: normal; /* this is standard */
+}
+
+code.lang-go > .token.comment,
+code.lang-go > .token.prolog,
+code.lang-go > .token.cdata {
+	color: #91889b;
+}
+
+code.lang-go > .token.punctuation {
+	color: #7b6995;
+}
+
+code.lang-go > .token.builtin,
+code.lang-go > .token.constant,
+code.lang-go > .token.boolean {
+	color: #ffe261;
+}
+
+code.lang-go > .token.number {
+	color: #b381c5;
+}
+
+code.lang-go > .token.important,
+code.lang-go > .token.atrule,
+code.lang-go > .token.property,
+code.lang-go > .token.keyword {
+	color: #40b4c4;
+}
+
+code.lang-go > .token.doctype,
+code.lang-go > .token.operator,
+code.lang-go > .token.inserted,
+code.lang-go > .token.tag,
+code.lang-go > .token.class-name,
+code.lang-go > .token.symbol {
+	color: #74dfc4;
+}
+
+code.lang-go > .token.attr-name,
+code.lang-go > .token.function,
+code.lang-go > .token.deleted,
+code.lang-go > .token.selector {
+	color: #eb64b9;
+}
+
+code.lang-go > .token.attr-value,
+code.lang-go > .token.regex,
+code.lang-go > .token.char,
+code.lang-go > .token.string {
+	color: #b4dce7;
+}
+
+code.lang-go > .token.entity,
+code.lang-go > .token.url,
+code.lang-go > .token.variable {
+	color: #ffffff;
+}
+
+/* The following rules are pretty similar across themes, but feel free to adjust them */
+code.lang-go > .token.bold {
+	font-weight: bold;
+}
+
+code.lang-go > .token.italic {
+	font-style: italic;
+}
+
+code.lang-go > .token.entity {
+	cursor: help;
+}
+
+code.lang-go > .token.namespace {
+	opacity: 0.7;
+}

@@ -1,0 +1,12 @@
+.docsify-copy-code-button{
+    background-color: var(--accent) !important;
+    padding: .25em .4em !important;
+    margin: 4px 6px;
+    border-radius: 2px !important;
+}
+
+.docsify-copy-code-button.success .success{
+    background-color: #40a240 !important;
+    transform: translate(-10%,-50%) !important;
+    -webkit-transform: translate(-10%,-50%) !important;
+}

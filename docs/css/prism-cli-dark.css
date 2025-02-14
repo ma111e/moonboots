@@ -1,0 +1,133 @@
+/*
+ * Laserwave Theme originally by Jared Jones for Visual Studio Code
+ * https://github.com/Jaredk3nt/laserwave
+ *
+ * Ported for PrismJS by Simon Jespersen [https://github.com/simjes]
+ */
+
+code[class*="lang-"],
+pre[class*="lang-"] {
+	background: #27212e;
+	color: #ffffff;
+	font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace; /* this is the default */
+	/* The following properties are standard, please leave them as they are */
+	font-size: 1em;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	line-height: 1.5;
+	-moz-tab-size: 2;
+	-o-tab-size: 2;
+	tab-size: 2;
+	/* The following properties are also standard */
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+code[class*="lang-"]::-moz-selection,
+code[class*="lang-"] ::-moz-selection,
+pre[class*="lang-"]::-moz-selection,
+pre[class*="lang-"] ::-moz-selection {
+	background: #eb64b927;
+	color: inherit;
+}
+
+code[class*="lang-"]::selection,
+code[class*="lang-"] ::selection,
+pre[class*="lang-"]::selection,
+pre[class*="lang-"] ::selection {
+	background: #eb64b927;
+	color: inherit;
+}
+
+/* Properties specific to code blocks */
+pre[class*="lang-"] {
+	padding: 1em; /* this is standard */
+	margin: 0.5em 0; /* this is the default */
+	overflow: auto; /* this is standard */
+	border-radius: 0.5em;
+}
+
+/* Properties specific to inline code */
+:not(pre) > code[class*="lang-"] {
+	padding: 0.2em 0.3em;
+	border-radius: 0.5rem;
+	white-space: normal; /* this is standard */
+}
+
+code.lang-cli > span.token.comment,
+code.lang-cli > span.token.prolog,
+code.lang-cli > span.token.cdata {
+	color: #91889b;
+}
+
+code.lang-cli > span.token.punctuation {
+	color: #7b6995;
+}
+
+code.lang-cli > span.token.builtin,
+code.lang-cli > span.token.constant,
+code.lang-cli > span.token.boolean {
+	color: #ffe261;
+}
+
+code.lang-cli > span.token.number {
+	color: #b381c5;
+}
+
+code.lang-cli > span.token.important,
+code.lang-cli > span.token.atrule,
+code.lang-cli > span.token.property,
+code.lang-cli > span.token.keyword {
+	color: #40b4c4;
+}
+
+code.lang-cli > span.token.doctype,
+code.lang-cli > span.token.operator,
+code.lang-cli > span.token.inserted,
+code.lang-cli > span.token.tag,
+code.lang-cli > span.token.class-name,
+code.lang-cli > span.token.symbol {
+	color: #74dfc4;
+}
+
+code.lang-cli > span.token.attr-name,
+code.lang-cli > span.token.function,
+code.lang-cli > span.token.deleted,
+code.lang-cli > span.token.selector {
+	color: #eb64b9;
+}
+
+code.lang-cli > span.token.attr-value,
+code.lang-cli > span.token.regex,
+code.lang-cli > span.token.char,
+code.lang-cli > span.token.string {
+	color: #b4dce7;
+}
+
+code.lang-cli > span.token.entity,
+code.lang-cli > span.token.url,
+code.lang-cli > span.token.variable {
+	color: #ffffff;
+}
+
+/* The following rules are pretty similar across themes, but feel free to adjust them */
+code.lang-cli > span.token.bold {
+	font-weight: bold;
+}
+
+code.lang-cli > span.token.italic {
+	font-style: italic;
+}
+
+code.lang-cli > span.token.entity {
+	cursor: help;
+}
+
+code.lang-cli > span.token.namespace {
+	opacity: 0.7;
+}

@@ -1,0 +1,31 @@
+package defs
+
+const (
+	MEM_COMMIT        = 0x1000
+	MEM_RESERVE       = 0x2000
+	PAGE_EXECUTE_READ = 0x20
+	PAGE_READWRITE    = 0x04
+)
+
+const (
+	RTL_CLONE_PROCESS_FLAGS_CREATE_SUSPENDED = 0x00000001
+	RTL_CLONE_PROCESS_FLAGS_INHERIT_HANDLES  = 0x00000002
+	RTL_CLONE_PROCESS_FLAGS_NO_SYNCHRONIZE   = 0x00000004
+)
+
+const (
+	QUEUE_USER_APC_FLAGS_NONE = iota
+	QUEUE_USER_APC_FLAGS_SPECIAL_USER_APC
+	QUEUE_USER_APC_FLGAS_MAX_VALUE
+)
+
+type T_CLIENT_ID struct {
+	UniqueProcess uintptr
+	UniqueThread  uintptr
+}
+
+type T_RTLP_PROCESS_REFLECTION_REFLECTION_INFORMATION struct {
+	ReflectionProcessHandle uintptr
+	ReflectionThreadHandle  uintptr
+	ReflectionClientId      T_CLIENT_ID
+}

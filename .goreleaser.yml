@@ -1,0 +1,51 @@
+version: 2
+before:
+  hooks:
+    - go mod download
+project_name: moonboots
+builds:
+  - id: moonboots_x86
+    main: .
+    binary: moonboots_x86
+    ldflags:
+      - ""
+#    gobinary: garble
+    goos:
+      - windows
+    goarch:
+      - 386
+  - id: moonboots_x64
+    main: .
+    binary: moonboots_x64
+    ldflags:
+      - ""
+#    gobinary: garble
+    goos:
+      - windows
+    goarch:
+      - amd64
+archives:
+  -
+    format: zip
+    files:
+      - LICENSE
+      - README.md
+    wrap_in_directory: true
+    name_template: >-
+      {{- .ProjectName }}_
+      {{- if eq .Os "windows" }}Windows_
+      {{- else }}{{ .Os }}_{{ end }}
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}_
+      {{- .Env.VERSION }}
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ .Tag }}"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'

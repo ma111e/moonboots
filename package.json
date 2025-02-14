@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "docsify-cli": "^4.4.4",
+    "now": "^21.0.1"
+  }
+}
