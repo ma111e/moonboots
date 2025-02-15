@@ -25,7 +25,7 @@ import (
 var (
 	RootCmd = &cobra.Command{
 		Use:     "moonboots [flags]",
-		Version: "1.0.0",
+		Version: "1.0.1",
 		Example: fmt.Sprintf(`# Run an hex or base64-encoded shellcode using the default "createthread" method
   moonboots.exe -s <shellcode>
 
@@ -150,6 +150,25 @@ func Run(_ *cobra.Command, _ []string) {
 		}
 	}
 
+	shellcodeFilepath := viper.GetString("file")
+	if len(shellcodeFilepath) > 0 {
+		content, err := os.ReadFile(shellcodeFilepath)
+		if err != nil {
+			log.Fatalln(err)
+		}
+
+		// Allow raw shellcode from files
+		// Note that custom shellcode crafted through deep madness (e.g. https://www.usenix.org/system/files/woot20-paper-patel_0.pdf)
+		// might defeat the check. In this case, the encoding should be forced using '--sc-encoding [base64|hex|raw]'
+		rawShellcode = string(content)
+
+		if !strutils.HasOnlyPrintable(content) {
+			if scEncoding == "" {
+				scEncoding = "raw"
+			}
+		}
+	}
+
 	if viper.GetBool("dirty-hex") {
 		scEncoding = "hex"
 
@@ -176,25 +195,6 @@ func Run(_ *cobra.Command, _ []string) {
 		}
 
 		log.Debugf("Cleaned shellcode: %s", rawShellcode)
-	}
-
-	shellcodeFilepath := viper.GetString("file")
-	if len(shellcodeFilepath) > 0 {
-		content, err := os.ReadFile(shellcodeFilepath)
-		if err != nil {
-			log.Fatalln(err)
-		}
-
-		// Allow raw shellcode from files
-		// Note that custom shellcode crafted through deep madness (e.g. https://www.usenix.org/system/files/woot20-paper-patel_0.pdf)
-		// might defeat the check. In this case, the encoding should be forced using '--sc-encoding [base64|hex|raw]'
-		rawShellcode = string(content)
-
-		if !strutils.HasOnlyPrintable(content) {
-			if scEncoding == "" {
-				scEncoding = "raw"
-			}
-		}
 	}
 
 	switch scEncoding {
