@@ -8,5 +8,5 @@
 - Developers
   - [Base](developers/base.md)
   - [Build](developers/build.md)
-  - [Managed](developers/managed.md)
+  - [Managed use](developers/managed_use)
   - [Plugins](developers/plugins.md)
