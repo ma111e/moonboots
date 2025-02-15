@@ -1,13 +1,12 @@
-- [Home](README.md)
-
 - User guide
+  - [README](README.md)
   - [Quickstart](user_guide/quickstart.md)
-  - [Shellcode loaders](user_guide/engines.md)
+  - [Engines](user_guide/engines.md)
   - [Idle](user_guide/idle.md)
   - [Tips](user_guide/tips.md)
 
 - Developers
-  - [Plugins](developers/plugins.md)
-  - [loaders.Base](developers/base.md)
-  - [Managed use](developers/managed.md)
+  - [Base](developers/base.md)
   - [Build](developers/build.md)
+  - [Managed](developers/managed.md)
+  - [Plugins](developers/plugins.md)
