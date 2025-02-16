@@ -8,4 +8,5 @@ var (
 	PIDPipeName   string
 	DelayOnReturn time.Duration
 	Keep          bool
+	Privileges    []string
 )

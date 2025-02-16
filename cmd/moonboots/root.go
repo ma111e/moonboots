@@ -25,7 +25,7 @@ import (
 var (
 	RootCmd = &cobra.Command{
 		Use:     "moonboots [flags]",
-		Version: "1.0.1",
+		Version: "1.1.0",
 		Example: fmt.Sprintf(`# Run an hex or base64-encoded shellcode using the default "createthread" method
   moonboots.exe -s <shellcode>
 
@@ -89,9 +89,6 @@ var (
 )
 
 var (
-	//method string
-	//shellcodeFilepath string
-	//shellcode         []byte
 	validScEncoding = []string{"base64", "hex", "raw"}
 
 	loaderArgs map[string]string
@@ -100,7 +97,7 @@ var (
 )
 
 func init() {
-	RootCmd.Flags().StringVarP(&settings.PIDPipeName, "pid-pipe", "P", "", "Specify the name of the rendez-vous pipe to pass the PID of the loaded shellcode to the parent process. This feature is enabled only if this flag is used")
+	RootCmd.Flags().StringVar(&settings.PIDPipeName, "pid-pipe", "", "Specify the name of the rendez-vous pipe to pass the PID of the loaded shellcode to the parent process. This feature is enabled only if this flag is used")
 	RootCmd.Flags().BoolVarP(&settings.Idle, "idle", "i", false, "Enter an infinite loop before starting the shellcode to allow debugger to attach")
 	RootCmd.Flags().BoolVarP(&settings.Keep, "keep", "k", false, "Don't terminate the target process on error")
 	RootCmd.Flags().DurationVarP(&settings.DelayOnReturn, "delay-on-return", "w", 0, "Add a delay after the injection routine has returned and before cleanup")
@@ -114,6 +111,7 @@ func init() {
 	RootCmd.Flags().BoolP("dirty-hex", "C", false, "Attempt to clean the shellcode by removing prefixes and keeping only hexadecimal runes [a-fA-F0-9]. This allows copying shellcode from various sources without having to clean it first, like C source code or \\x and 0x prefixed shellcode ")
 	RootCmd.Flags().BoolP("admin", "A", false, "Self elevate to high-integrity if needed (might trigger UAC)")
 	RootCmd.Flags().BoolP("priv-debug", "E", false, "Enable debug privileges. The program will self elevate to high-integrity if the current rights are too low (might trigger UAC)")
+	RootCmd.Flags().StringArrayVarP(&settings.Privileges, "priv", "P", []string{}, "Enable specific Windows privileges (can be specified multiple times)")
 
 	RootCmd.Flags().StringP("method", "m", "createthread", fmt.Sprintf("Method to use to load the shellcode. Available: %v", loaders.AvailableLoaders.List()))
 	RootCmd.Flags().StringToStringVarP(&loaderArgs, "option", "o", map[string]string{}, `Set options for the loader, such as the target program to inject your shellcode in. Repeat it for each option, as many times as needed, e.g. '-o target=notepad.exe -o args="C:\users\user\Desktop\mydoc.txt"'`)
@@ -175,6 +173,7 @@ func Run(_ *cobra.Command, _ []string) {
 		chunks := strings.Split(rawShellcode, "\n")
 		stripped := chunks
 		for idx, chunk := range chunks {
+			// Add ':' and '\t' ?
 			chunk = strutils.TrimBefore(chunk, "=")
 			chunk = strutils.TrimAfter(chunk, "//")
 			chunk = strutils.TrimAfter(chunk, "#")
@@ -266,6 +265,36 @@ func Run(_ *cobra.Command, _ []string) {
 		}
 	}
 
+	if len(settings.Privileges) > 0 {
+		var validPrivs []string
+		for _, requestedPriv := range settings.Privileges {
+			found := false
+			for _, validPriv := range win32.AllPrivileges {
+				if strings.EqualFold(requestedPriv, validPriv) {
+					validPrivs = append(validPrivs, validPriv) // Use the case-sensitive version from AllPrivileges
+					found = true
+					break
+				}
+			}
+			if !found {
+				log.Fatalf("Invalid privilege specified: %s\nValid privileges are: %s",
+					requestedPriv,
+					strings.Join(win32.AllPrivileges, ", "))
+			}
+		}
+
+		err = winio.EnableProcessPrivileges(validPrivs)
+		if err != nil {
+			log.WithField("err", err).Warnln("Failed to set custom privileges")
+
+			err = elevate.RequireElevated()
+			if err != nil {
+				log.WithField("err", err).Fatal("Failed to get token integrity level")
+				return
+			}
+		}
+	}
+
 	if viper.GetBool("priv-debug") {
 		err = winio.EnableProcessPrivileges([]string{win32.SE_DEBUG_NAME})
 		if err != nil {
@@ -309,6 +338,7 @@ func Run(_ *cobra.Command, _ []string) {
 		return
 	}
 
+	//TODO: print shellcode and quit if parsing only flag has been specified ?
 	err = ldr.Run(shellcode)
 	if err != nil {
 		ldr.SetError(err)

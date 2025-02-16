@@ -43,7 +43,7 @@ const (
 )
 
 var (
-	AllPriliveges = []string{
+	AllPrivileges = []string{
 		SE_BACKUP_NAME,
 		SE_CHANGENOTIFY_NAME,
 		SE_CREATEGLOBAL_NAME,
