@@ -2,7 +2,7 @@
 
 For some use cases, Moonboots must be able to be used as a loader by another program. 
 
-The `--pid-pipe|-P` flag is available to specify a name for a rendez-vous pipe to which the PID of the process running the shellcode will be sent back.
+The `--pid-pipe` flag is available to specify a name for a rendez-vous pipe to which the PID of the process running the shellcode will be sent back.
 
 For simplicity's sake, we'll be using a [winio](https://github.com/microsoft/go-winio) pipe for the examples below.
 

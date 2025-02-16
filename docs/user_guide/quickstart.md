@@ -11,15 +11,16 @@ Flags:
   -d, --debug                      Debug output
   -w, --delay-on-return duration   Add a delay after the injection routine has returned and before cleanup
   -D, --demo                       Execute a built-in demo shellcode spawning calc.exe
-  -C, --dirty-hex                  Attempt to clean the shellcode by removing prefixes and keeping only hexadecimal runes [a-fA-F0-9]. This allows copying shellcode from various sources without having to clean it first, like C source code or \x and 0x prefixed shellcode
+  -C, --dirty-hex                  Attempt to clean the shellcode by removing prefixes and keeping only hexadecimal runes [a-fA-F0-9]. This allows copying shellcode from various sources without having to clean it first, like C source code or \x and 0x prefixed shellcode 
   -f, --file string                File containing the shellcode to load in raw, hex or base64 format
   -h, --help                       help for moonboots
   -i, --idle                       Enter an infinite loop before starting the shellcode to allow debugger to attach
   -k, --keep                       Don't terminate the target process on error
-  -m, --method string              Method to use to load the shellcode. Available: [createthreadnative earlybird dirtyvanity rtlcreateuserthread uuid createprocess syscall createthread etwpcreate queueapc createfiber createremotethread createremotethreadnative] (default "createthread")
+  -m, --method string              Method to use to load the shellcode. Available: [uuid createprocess createremotethread createremotethreadnative createthreadnative earlybird queueapc createfiber createthread dirtyvanity etwpcreate rtlcreateuserthread syscall] (default "createthread")
   -o, --option stringToString      Set options for the loader, such as the target program to inject your shellcode in. Repeat it for each option, as many times as needed, e.g. '-o target=notepad.exe -o args="C:\users\user\Desktop\mydoc.txt"' (default [])
   -p, --pid string                 PID of the process to target. Alias for '-o pid=<PID>'
-  -P, --pid-pipe string            Specify the name of the rendez-vous pipe to pass the PID of the loaded shellcode to the parent process. This feature is enabled only if this flag is used
+      --pid-pipe string            Specify the name of the rendez-vous pipe to pass the PID of the loaded shellcode to the parent process. This feature is enabled only if this flag is used
+  -P, --priv stringArray           Enable specific Windows privileges (can be specified multiple times)
   -E, --priv-debug                 Enable debug privileges. The program will self elevate to high-integrity if the current rights are too low (might trigger UAC)
   -e, --sc-encoding string         Specify the encoding of the input shellcode if the wrong one is selected automatically. This would be required for base64-encoded shellcode that would result in a valid hex-encoded string or ascii shellcode. Valid encodings: [base64 hex raw]
   -s, --shellcode string           Shellcode in hex (i.e. '50515253...') or base64 format (i.e. 'UFFSU1ZX...')
