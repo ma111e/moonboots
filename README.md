@@ -3,6 +3,8 @@ Moonboots helps malware analysts bootstrap shellcode through multiple methods.
 
 It currently implements multiple shellcode loading techniques in pure Go based on [Ne0nd0g](https://github.com/Ne0nd0g/go-shellcode)'s work and can be easily extended by adding new loader plugins.
 
+See [the release post](https://ma111e.github.io/blog/posts/moonboots_1.0/moonboots_1.0/) for more details.
+
 ## Documentation
 Docs available on [https://ma111e.github.io/moonboots/](https://ma111e.github.io/moonboots/).
 
